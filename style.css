@@ -1,0 +1,69 @@
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+ .library {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px; /* Space between cards */
+      padding: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .book {
+  background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      text-align: center;
+      flex: 1 1 200px; /* Flex properties for responsiveness */
+      max-width: 200px; /* Limit card width */
+    }
+
+    .form-popup {
+            display: none;
+            position: fixed;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            background-color: #fff;
+            border: 2px solid #ccc;
+            z-index: 9;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+        .form-popup input,
+        .form-popup select,
+        .form-popup button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .form-popup button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+        .open-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .open-button:hover {
+            background-color: #0056b3;
+        }
