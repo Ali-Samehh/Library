@@ -7,6 +7,33 @@
 </head>
 <body>
     <h1>Book</h1> 
+    <button id="add-book-btn">Add Book</button>
+    <dialog id="addBookDialog" >
+        <form method="dialog" class="dialog-form" id="addBookForm">
+          <h2>Add New Book</h2>
+          <label>
+            Book Title:
+            <input type="text" name="title" required>
+          </label>
+          <label>
+            Author:
+            <input type="text" name="author" required>
+          </label>
+          <label>
+            Pages:
+            <input type="text" name="pages" required>
+          </label>
+          <label>
+            Read:
+            <input type="text" name="read" required>
+          </label>
+          <menu>
+            <button type="submit" class="button">Add Book</button>
+            <button type="button" class="button" id="cancelButton">Cancel</button>
+          </menu>
+        </form>
+      </dialog>
+    <div class="book-container"></div>
     
     <script src="index.js"></script>
 </body>
