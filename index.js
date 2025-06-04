@@ -1,3 +1,4 @@
+
 const addBookBtn = document.querySelector('#add-book-btn');
 const addBookDialog = document.querySelector('#addBookDialog');
 const cancelButton = document.querySelector('#cancelButton');
@@ -99,6 +100,3 @@ addBookForm.addEventListener('submit' , e => {
     addBookForm.reset();
 
 })
-
-
-
