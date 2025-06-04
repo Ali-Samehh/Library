@@ -3,19 +3,24 @@ const addBookDialog = document.querySelector('#addBookDialog');
 const cancelButton = document.querySelector('#cancelButton');
 const addBookForm = document.querySelector('#addBookForm');
 
+const bookContainer = document.querySelector('.book-container')
+
 
 
 const myLibrary = [];
-const bookContainer = document.querySelector('.book-container');
 
-function Book (title, author, pages, read ) {
+function Book (title,author,pages,read){
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
 }
 
-function addBookToLibrary (title, author, pages, read) {
+Book.prototype.toggleRead = function() {
+    
+} 
+
+function addBookToLibrary (title,author,pages,read){
     const book = new Book(title,author,pages,read);
     myLibrary.push(book);
     myLibrary.forEach(book => {
@@ -23,58 +28,72 @@ function addBookToLibrary (title, author, pages, read) {
     })
 }
 
-function displayBooks () {
-    myLibrary.forEach(book => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        
-        // ai generated
-        card.setAttribute('data-book-id', book.id);
-
-        const title = document.createElement('h2');
-        card.appendChild(title);
-        title.textContent = book.title;
-        const author = document.createElement('p');
-        card.appendChild(author);
-        author.textContent = book.author;
-        const pages = document.createElement('p');
-        card.appendChild(pages);
-        pages.textContent = book.pages;
-        const read = document.createElement('p');
-        read.textContent = book.read;
-        card.appendChild(read);
-
-        const removeBtn = document.createElement('button')
-        removeBtn.textContent = 'Remove';
-        removeBtn.classList.add('remove-btn');
-        card.appendChild(removeBtn);
-      
-        bookContainer.appendChild(card);
-    })    
+function removeBook(bookId) {
+    const bookIndex = myLibrary.findIndex(book => book.id === bookId)
+    if (bookIndex !== -1) {
+        myLibrary.splice(bookIndex, 1);
+        bookContainer.innerHTML = '';
+        displayBooks();
+    }
 }
 
-addBookBtn.addEventListener('click', () => {
+function displayBooks () {
+    myLibrary.forEach (book => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+    
+        const title = document.createElement('h2');
+        title.textContent = `Title: ${book.title}`;
+        card.appendChild(title);
+    
+        const author = document.createElement('p');
+        author.textContent = `Author: ${book.author}`;
+        card.appendChild(author);
+    
+        const pages = document.createElement('p');
+        pages.textContent = `${book.pages} pages`;
+        card.appendChild(pages);
+    
+        const read = document.createElement('button');
+        read.textContent = `Read: ${book.read}`;
+        card.appendChild(read);
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Remove';
+        removeBtn.classList.add('remove-btn');
+        removeBtn.addEventListener('click' , () => {
+            removeBook(book.id);
+        })
+        card.appendChild(removeBtn);
+
+        bookContainer.appendChild(card);
+    })
+    
+}
+
+addBookBtn.addEventListener('click' , () => {
     addBookDialog.showModal();
 })
 
-cancelButton.addEventListener ('click' , ()=> {
+cancelButton.addEventListener('click' , () => {
     addBookDialog.close();
 })
 
-addBookForm.addEventListener('submit', (e) => {
+addBookForm.addEventListener('submit' , e => {
     e.preventDefault();
     const formData = new FormData(addBookForm);
     const title = formData.get('title');
     const author = formData.get('author');
     const pages = formData.get('pages');
     const read = formData.get('read');
+
     addBookToLibrary(title,author,pages,read);
     bookContainer.innerHTML = '';
     displayBooks();
-    addBookForm.reset();
     addBookDialog.close();
- 
-});
+    addBookForm.reset();
+
+})
 
 
 
