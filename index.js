@@ -17,7 +17,7 @@ function Book (title,author,pages,read){
 }
 
 Book.prototype.toggleRead = function() {
-    
+    this.read = this.read === 'yes' ? 'no' : 'yes';
 } 
 
 function addBookToLibrary (title,author,pages,read){
@@ -56,6 +56,11 @@ function displayBooks () {
     
         const read = document.createElement('button');
         read.textContent = `Read: ${book.read}`;
+        read.addEventListener('click' , ()=> {
+            book.toggleRead();
+            bookContainer.innerHTML = '';
+            displayBooks();
+        })
         card.appendChild(read);
         
         const removeBtn = document.createElement('button');
